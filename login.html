@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in | Faculty Attendance</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/common.js" defer></script>
+  <script src="/js/login.js" defer></script>
+</head>
+<body>
+  <div class="demo-banner" data-demo-banner hidden>Demo mode: any login is accepted</div>
+  <main class="login-shell">
+    <section class="login-card">
+      <h1>Faculty Attendance</h1>
+      <p class="subtitle">Sign in to manage faculty attendance.</p>
+      <form class="login-form" id="login-form">
+        <label>Username
+          <input name="username" autocomplete="username" required>
+        </label>
+        <label>Password
+          <input name="password" type="password" autocomplete="current-password" required>
+        </label>
+        <button type="submit">Sign in</button>
+      </form>
+      <p class="message" id="login-message" role="alert"></p>
+      <p class="demo-hint" id="demo-hint" hidden>Demo mode is on. Enter any username and password.</p>
+    </section>
+  </main>
+</body>
+</html>

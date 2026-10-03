@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reports | Faculty Attendance</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/common.js" defer></script>
+  <script src="/js/reports.js" defer></script>
+</head>
+<body>
+  <div class="demo-banner" data-demo-banner hidden>Demo mode: any login is accepted</div>
+  <header class="site-header">
+    <a class="brand" href="/admin-dashboard.html">Faculty Attendance</a>
+    <div class="header-user"><span>Signed in as <strong data-user-name></strong></span><button data-logout>Log out</button></div>
+  </header>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/admin-dashboard.html">Dashboard</a>
+    <a href="/faculty.html">Faculty</a>
+    <a href="/attendance.html">Attendance</a>
+    <a href="/reports.html" aria-current="page">Reports &amp; CSV</a>
+  </nav>
+  <main>
+    <h1>Attendance reports</h1>
+    <p class="subtitle">Review monthly totals and export individual attendance entries as CSV.</p>
+    <section class="panel">
+      <div class="toolbar">
+        <label>Report month<input id="report-month" type="month" required></label>
+        <button id="export-csv">Export CSV</button>
+      </div>
+      <p class="message" id="report-message" role="status"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Department</th><th>Present</th><th>Absent</th><th>Late</th></tr></thead>
+          <tbody id="report-list"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

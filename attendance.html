@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Attendance | Faculty Attendance</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/common.js" defer></script>
+  <script src="/js/attendance.js" defer></script>
+</head>
+<body>
+  <div class="demo-banner" data-demo-banner hidden>Demo mode: any login is accepted</div>
+  <header class="site-header">
+    <a class="brand" href="/admin-dashboard.html">Faculty Attendance</a>
+    <div class="header-user"><span>Signed in as <strong data-user-name></strong></span><button data-logout>Log out</button></div>
+  </header>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/admin-dashboard.html">Dashboard</a>
+    <a href="/faculty.html">Faculty</a>
+    <a href="/attendance.html" aria-current="page">Attendance</a>
+    <a href="/reports.html">Reports &amp; CSV</a>
+  </nav>
+  <main>
+    <h1>Attendance</h1>
+    <p class="subtitle">Record or update the attendance status for each faculty member.</p>
+    <section class="panel">
+      <div class="toolbar">
+        <label>Attendance date<input id="attendance-date" type="date" required></label>
+        <span class="status">Choose a status and save it for each faculty member.</span>
+      </div>
+      <p class="message" id="attendance-message" role="status"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Department</th><th>Status</th><th>Action</th></tr></thead>
+          <tbody id="attendance-list"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

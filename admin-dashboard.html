@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | Faculty Attendance</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <script src="/js/common.js" defer></script>
+  <script src="/js/dashboard.js" defer></script>
+</head>
+<body>
+  <div class="demo-banner" data-demo-banner hidden>Demo mode: any login is accepted</div>
+  <header class="site-header">
+    <a class="brand" href="/admin-dashboard.html">Faculty Attendance</a>
+    <div class="header-user"><span>Signed in as <strong data-user-name></strong></span><button data-logout>Log out</button></div>
+  </header>
+  <nav class="site-nav" aria-label="Main navigation">
+    <a href="/admin-dashboard.html" aria-current="page">Dashboard</a>
+    <a href="/faculty.html">Faculty</a>
+    <a href="/attendance.html">Attendance</a>
+    <a href="/reports.html">Reports &amp; CSV</a>
+  </nav>
+  <main>
+    <h1>Admin dashboard</h1>
+    <p class="subtitle">A quick overview of faculty and today's attendance (<span id="dashboard-date"></span>).</p>
+    <p class="message" id="dashboard-message" role="alert"></p>
+    <section class="grid stats" aria-label="Attendance summary">
+      <article class="stat-card"><div class="stat-label">Faculty members</div><div class="stat-value" id="faculty-count">—</div></article>
+      <article class="stat-card"><div class="stat-label">Marked today</div><div class="stat-value" id="today-count">—</div></article>
+      <article class="stat-card"><div class="stat-label">Present today</div><div class="stat-value" id="present-count">—</div></article>
+    </section>
+    <section class="panel">
+      <h2>Get started</h2>
+      <p class="subtitle">Add faculty, record attendance, and review or export monthly reports. Changes are saved in the SQLite database.</p>
+      <div class="grid">
+        <a class="button" href="/faculty.html">Manage faculty</a>
+        <a class="button" href="/attendance.html">Mark attendance</a>
+        <a class="button" href="/reports.html">Open reports</a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>
