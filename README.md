@@ -1,23 +1,26 @@
 # Faculty Attendance
 
-A small faculty attendance demo built with HTML, CSS, JavaScript, Express, and SQLite.
+A small faculty attendance demo built with HTML, CSS, and JavaScript, running on Netlify. The static pages live in `public/`, the API is a Netlify Function (`netlify/functions/api.mts`), and data is stored in Netlify Database (managed Postgres) through Drizzle ORM.
 
-## Run the app
+## Run locally
 
-1. Install Node.js 18 or newer.
+1. Install Node.js 18 or newer and the Netlify CLI.
 2. Run `npm install`.
-3. Run `npm start`.
-4. Open [http://localhost:3000](http://localhost:3000).
+3. Run `npm run dev` (this runs `netlify dev`).
 
-The project includes a sample SQLite database at `data/faculty-attendance.sqlite` and its repeatable sample-data script at `data/demo-seed.sql`. It includes 18 sample faculty members and two weeks of varied attendance records. The database is created automatically if it is missing; to load or refresh the included examples in an existing database, run `node -e "require('better-sqlite3')('data/faculty-attendance.sqlite').exec(require('fs').readFileSync('data/demo-seed.sql','utf8'))"`. In demo mode, enter any non-empty username and password. The login creates an administrator session; faculty, attendance, reports, and CSV export continue to use the SQLite database.
+## Database
 
-On Windows, after dependencies are installed, you can also start the app by double-clicking `start-demo.bat`. It uses Node.js from PATH or the per-user Node.js runtime at `%LOCALAPPDATA%\faculty-demo-node\node-v22.23.3-win-x64`.
+The schema is defined in `db/schema.ts`. Migrations live in `netlify/database/migrations/` and are applied automatically by Netlify on each deploy. After changing the schema, run `npx drizzle-kit generate --name <change_name>` to create a new migration.
 
-## How to turn off demo mode
+The migrations include repeatable sample data: 19 sample faculty members and two weeks of varied attendance records ending on the day the migration was applied.
 
-Set `DEMO_MODE=false` in `.env` and restart the server. Normal login then checks the `users` table and compares the submitted password using bcrypt.
+## Demo mode and sign-in
 
-To provision an administrator for normal mode, set `ADMIN_USERNAME` and `ADMIN_PASSWORD` in `.env` before the first startup. The server stores a bcrypt hash in SQLite and only creates that account if the username does not already exist. Keep `.env` private and set a strong `SESSION_SECRET` when deploying.
+Set the `DEMO_MODE` environment variable to `true` (in the Netlify UI for deployed sites, or in `.env` for `netlify dev`) to let any non-empty username and password sign in as an administrator. Only enable this for demos — anyone who can reach the site gets full access.
+
+With demo mode off, sign-in checks the `users` table using bcrypt. To provision an administrator, set `ADMIN_USERNAME` and `ADMIN_PASSWORD` as environment variables; the account is created with a hashed password the first time that username signs in, and is never overwritten afterwards.
+
+Sessions are stored in the database and expire after eight hours.
 
 ## Pages
 

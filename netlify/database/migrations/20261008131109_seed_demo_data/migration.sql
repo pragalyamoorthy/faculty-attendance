@@ -20,22 +20,15 @@ VALUES
   ('Dakota Hall', 'Biology', 'dakota.hall@example.test'),
   ('Harper Young', 'Chemistry', 'harper.young@example.test')
 ON CONFLICT(email) DO NOTHING;
-
-WITH RECURSIVE demo_dates(attendance_date, day_offset) AS (
-  SELECT date('now', '-13 days'), 0
-  UNION ALL
-  SELECT date(attendance_date, '+1 day'), day_offset + 1
-  FROM demo_dates
-  WHERE day_offset < 13
-)
+--> statement-breakpoint
 INSERT INTO attendance (faculty_id, date, status)
-SELECT faculty.id, demo_dates.attendance_date,
-       CASE (faculty.id + demo_dates.day_offset) % 7
+SELECT faculty.id, to_char(CURRENT_DATE - 13 + day_offset, 'YYYY-MM-DD'),
+       CASE (faculty.id + day_offset) % 7
          WHEN 0 THEN 'absent'
          WHEN 1 THEN 'late'
          ELSE 'present'
        END
 FROM faculty
-CROSS JOIN demo_dates
+CROSS JOIN generate_series(0, 13) AS day_offset
 WHERE faculty.email LIKE '%@example.test'
-ON CONFLICT(faculty_id, date) DO NOTHING;
+ON CONFLICT (faculty_id, date) DO NOTHING;
